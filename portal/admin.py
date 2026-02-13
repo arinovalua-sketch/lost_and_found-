@@ -12,4 +12,7 @@ class ItemAdmin(admin.ModelAdmin):
 class ClaimAdmin(admin.ModelAdmin):
     list_display = ('user', 'item', 'status')
     list_filter = ('status',)
+admin.site.site_header = "Lost & Found Admin"
+admin.site.site_title = "Lost & Found"
+admin.site.index_title = "Dashboard"
 
