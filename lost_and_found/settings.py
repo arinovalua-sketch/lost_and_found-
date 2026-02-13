@@ -114,9 +114,6 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), 
-]
 
 # Настройка WhiteNoise для сжатия и долгого кэширования (полезно для Render)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
