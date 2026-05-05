@@ -122,14 +122,17 @@ def create_item_api(request):
     )
 
 
-
 @csrf_exempt
 def update_item_api(request, item_id):
-    if request.method != 'POST':
-        return JsonResponse({'error': 'POST only'}, status=405)
+    if request.method not in ['PUT', 'PATCH']:
+        return JsonResponse({'error': 'PUT or PATCH only'}, status=405)
 
     data = json.loads(request.body)
-    item = Item.objects.get(id=item_id)
+
+    try:
+        item = Item.objects.get(id=item_id)
+    except Item.DoesNotExist:
+        return JsonResponse({'error': 'Item not found'}, status=404)
 
     item.title = data.get('title', item.title)
     item.description = data.get('description', item.description)
@@ -140,6 +143,7 @@ def update_item_api(request, item_id):
     item.save()
 
     return JsonResponse({'status': 'updated'})
+
 
 @csrf_exempt
 def delete_item_api(request, item_id):
